@@ -1,0 +1,58 @@
+name: Publish to NuGet
+
+on:
+  push:
+    tags:
+      - 'v*' # 当推送形如 v1.0.0 的标签时自动触发
+  workflow_dispatch: # 允许在 GitHub Actions 页面上手动触发
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    environment: production
+    
+    # 【新增】必须的权限：允许 GitHub Actions 生成 OIDC Token 用于 NuGet 的 Trusted Publishing，同时赋予写权限以发布 GitHub Release 和 GitHub Packages
+    permissions:
+      id-token: write 
+      contents: write
+      packages: write
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x' # 确保与项目的目标框架一致
+
+    - name: Restore dependencies
+      run: dotnet restore src/ConsoleProgressBar/ConsoleProgressBar.csproj
+
+    - name: Build project
+      run: dotnet build src/ConsoleProgressBar/ConsoleProgressBar.csproj -c Release --no-restore
+
+    - name: Pack NuGet package
+      run: dotnet pack src/ConsoleProgressBar/ConsoleProgressBar.csproj -c Release --no-build --output nupkgs
+
+    # 【新增】使用官方 NuGet/login 动作，通过 OIDC 换取短效 API Key
+    - name: NuGet Login
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: chuckiep
+      
+    - name: Publish to NuGet.org
+      run: dotnet nuget push nupkgs/*.nupkg --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+    - name: Publish to GitHub Packages
+      run: dotnet nuget push nupkgs/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
+
+    - name: Create GitHub Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          nupkgs/*.nupkg
+          src/ConsoleProgressBar/bin/Release/net8.0/ConsoleProgressBar.dll
+        generate_release_notes: true

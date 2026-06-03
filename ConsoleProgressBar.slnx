@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ConsoleProgressBar.Example/ConsoleProgressBar.Example.csproj" />
+    <Project Path="src/ConsoleProgressBar/ConsoleProgressBar.csproj" />
+  </Folder>
+</Solution>
