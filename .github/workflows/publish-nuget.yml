@@ -11,10 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     
-    # 【新增】必须的权限：允许 GitHub Actions 生成 OIDC Token 用于 NuGet 的 Trusted Publishing，同时赋予写权限以发布 GitHub Release
+    # 【新增】必须的权限：允许 GitHub Actions 生成 OIDC Token 用于 NuGet 的 Trusted Publishing，同时赋予写权限以发布 GitHub Release 和 GitHub Packages
     permissions:
       id-token: write 
       contents: write
+      packages: write
 
     steps:
     - name: Checkout Code
@@ -43,6 +44,9 @@ jobs:
       
     - name: Publish to NuGet.org
       run: dotnet nuget push nupkgs/*.nupkg --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+    - name: Publish to GitHub Packages
+      run: dotnet nuget push nupkgs/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
