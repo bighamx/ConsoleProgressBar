@@ -17,7 +17,7 @@
 
 ## 视觉效果展示
 
-![效果演示](assets/demo.gif)
+![效果演示](https://raw.githubusercontent.com/bighamx/ConsoleProgressBar/master/assets/demo.gif)
 
 ### 内置样式
 
@@ -130,7 +130,7 @@ A powerful, customizable, and thread-safe progress bar library for .NET Console 
 
 ## Visual Showcases
 
-![Demo](assets/demo.gif)
+![Demo](https://raw.githubusercontent.com/bighamx/ConsoleProgressBar/master/assets/demo.gif)
 
 ### Built-in Styles
 
