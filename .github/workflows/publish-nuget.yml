@@ -33,6 +33,11 @@ jobs:
     - name: Pack NuGet package
       run: dotnet pack src/ConsoleProgressBar/ConsoleProgressBar.csproj -c Release --no-build --output nupkgs
 
-    # 【修改】使用 Trusted Publishing，不再需要 -k 参数和 API Key
+    # 【新增】使用官方 NuGet/login 动作，通过 OIDC 换取短效 API Key
+    - name: NuGet Login
+      uses: NuGet/login@v1
+      id: login
+      # 注意：如果这步报错找不到用户，请在下面增加 with: user: 您的NuGet用户名
+      
     - name: Publish to NuGet.org
-      run: dotnet nuget push nupkgs/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push nupkgs/*.nupkg --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
