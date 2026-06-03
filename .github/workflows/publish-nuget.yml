@@ -9,6 +9,7 @@ on:
 jobs:
   build_and_publish:
     runs-on: ubuntu-latest
+    environment: production
     
     # 【新增】必须的权限：允许 GitHub Actions 生成 OIDC Token 用于 NuGet 的 Trusted Publishing
     permissions:
