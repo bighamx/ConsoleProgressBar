@@ -1,0 +1,35 @@
+name: Build CI
+
+on:
+  push:
+    branches: [ master, main ]
+    paths-ignore:
+      - '**/*.md'
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore src/ConsoleProgressBar/ConsoleProgressBar.csproj
+      
+    - name: Build
+      run: dotnet build src/ConsoleProgressBar/ConsoleProgressBar.csproj -c Release --no-restore
+      
+    - name: Upload DLL Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ConsoleProgressBar-DLL
+        path: src/ConsoleProgressBar/bin/Release/net8.0/ConsoleProgressBar.dll
