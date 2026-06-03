@@ -9,10 +9,13 @@
     <!-- NuGet Package Metadata -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Chuckie.ConsoleProgressBar</PackageId>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Authors>Chuckie</Authors>
     <Company>Chuckie</Company>
     <Description>An easy-to-use and beautiful console progress bar library for .NET.</Description>
+    <RepositoryUrl>https://github.com/bighamx/ConsoleProgressBar</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <ProjectUrl>https://github.com/bighamx/ConsoleProgressBar</ProjectUrl>
     <PackageTags>console;progress;progressbar</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
