@@ -1,6 +1,6 @@
 # ConsoleProgressBar
 
-[![NuGet](https://img.shields.io/nuget/v/ConsoleProgressBar.svg)](https://www.nuget.org/packages/ConsoleProgressBar/)
+[![NuGet](https://img.shields.io/nuget/v/Chuckie.ConsoleProgressBar.svg)](https://www.nuget.org/packages/Chuckie.ConsoleProgressBar/)
 
 [English Version Below](#english-version)
 
@@ -38,7 +38,7 @@
 你可以通过 NuGet 命令行或者包管理器安装 `ConsoleProgressBar`：
 
 ```bash
-dotnet add package ConsoleProgressBar
+dotnet add package Chuckie.ConsoleProgressBar
 ```
 
 ## 快速入门
@@ -115,7 +115,7 @@ var pb = new ConsoleProgressBar(100, "自定义", 50, customChars);
 
 # English Version
 
-[![NuGet](https://img.shields.io/nuget/v/ConsoleProgressBar.svg)](https://www.nuget.org/packages/ConsoleProgressBar/)
+[![NuGet](https://img.shields.io/nuget/v/Chuckie.ConsoleProgressBar.svg)](https://www.nuget.org/packages/Chuckie.ConsoleProgressBar/)
 
 A powerful, customizable, and thread-safe progress bar library for .NET Console Applications. It supports both single task and multi-task parallel progress tracking with rich built-in styles and dynamic information display.
 
@@ -151,7 +151,7 @@ The progress bar automatically displays detailed metrics below the bar:
 You can install `ConsoleProgressBar` via the NuGet CLI or Package Manager:
 
 ```bash
-dotnet add package ConsoleProgressBar
+dotnet add package Chuckie.ConsoleProgressBar
 ```
 
 ## Quick Start

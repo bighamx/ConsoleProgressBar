@@ -37,7 +37,8 @@ jobs:
     - name: NuGet Login
       uses: NuGet/login@v1
       id: login
-      # 注意：如果这步报错找不到用户，请在下面增加 with: user: 您的NuGet用户名
+      with:
+        user: ${{ github.repository_owner }}
       
     - name: Publish to NuGet.org
       run: dotnet nuget push nupkgs/*.nupkg --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
