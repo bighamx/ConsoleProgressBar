@@ -4,6 +4,16 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
+
+    <!-- NuGet Package Metadata -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>ConsoleProgressBar</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Chuckie</Authors>
+    <Company>Chuckie</Company>
+    <Description>An easy-to-use and beautiful console progress bar library for .NET.</Description>
+    <PackageTags>console;progress;progressbar</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
 </Project>

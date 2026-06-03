@@ -1,0 +1,38 @@
+name: Publish to NuGet
+
+on:
+  push:
+    tags:
+      - 'v*' # 当推送形如 v1.0.0 的标签时自动触发
+  workflow_dispatch: # 允许在 GitHub Actions 页面上手动触发
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    
+    # 【新增】必须的权限：允许 GitHub Actions 生成 OIDC Token 用于 NuGet 的 Trusted Publishing
+    permissions:
+      id-token: write 
+      contents: read
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x' # 确保与项目的目标框架一致
+
+    - name: Restore dependencies
+      run: dotnet restore src/ConsoleProgressBar/ConsoleProgressBar.csproj
+
+    - name: Build project
+      run: dotnet build src/ConsoleProgressBar/ConsoleProgressBar.csproj -c Release --no-restore
+
+    - name: Pack NuGet package
+      run: dotnet pack src/ConsoleProgressBar/ConsoleProgressBar.csproj -c Release --no-build --output nupkgs
+
+    # 【修改】使用 Trusted Publishing，不再需要 -k 参数和 API Key
+    - name: Publish to NuGet.org
+      run: dotnet nuget push nupkgs/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
