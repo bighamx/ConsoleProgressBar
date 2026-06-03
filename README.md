@@ -1,5 +1,7 @@
 # ConsoleProgressBar
 
+[![NuGet](https://img.shields.io/nuget/v/ConsoleProgressBar.svg)](https://www.nuget.org/packages/ConsoleProgressBar/)
+
 [English Version Below](#english-version)
 
 一款为 .NET 控制台应用程序设计的强大、高度可定制且线程安全的进度条库。它支持单任务以及多任务并行的进度追踪，并内置了丰富的字符样式和动态信息展示。
@@ -30,6 +32,14 @@
 ### 进度详情
 进度条会自动在下方显示详尽的数据指标：
 `1,024/2,048 | 00:05 < 00:05 | 204.8/s`
+
+## 安装
+
+你可以通过 NuGet 命令行或者包管理器安装 `ConsoleProgressBar`：
+
+```bash
+dotnet add package ConsoleProgressBar
+```
 
 ## 快速入门
 
@@ -105,6 +115,8 @@ var pb = new ConsoleProgressBar(100, "自定义", 50, customChars);
 
 # English Version
 
+[![NuGet](https://img.shields.io/nuget/v/ConsoleProgressBar.svg)](https://www.nuget.org/packages/ConsoleProgressBar/)
+
 A powerful, customizable, and thread-safe progress bar library for .NET Console Applications. It supports both single task and multi-task parallel progress tracking with rich built-in styles and dynamic information display.
 
 ## Features
@@ -133,6 +145,14 @@ A powerful, customizable, and thread-safe progress bar library for .NET Console 
 ### Progress Details
 The progress bar automatically displays detailed metrics below the bar:
 `1,024/2,048 | 00:05 < 00:05 | 204.8/s`
+
+## Installation
+
+You can install `ConsoleProgressBar` via the NuGet CLI or Package Manager:
+
+```bash
+dotnet add package ConsoleProgressBar
+```
 
 ## Quick Start
 
